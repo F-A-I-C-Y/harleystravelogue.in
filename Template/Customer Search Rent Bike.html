@@ -1,0 +1,88 @@
+{% extends 'Customer Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" class="banner_form">
+{% csrf_token %}	
+<label class="head">VIEW RENTABLE VEHICLES</label>	
+<table>
+    <tr>
+        
+    <td>
+        <select name="dist" class="textbox" style="color: rgb(137, 126, 231);" id="sel">
+            <option>---Select District---</option>
+            <option>Trivandrum</option>
+            <option>Kollam</option>
+            <option>Pathanamthitta</option>
+            <option>Kolkata</option>
+            <option>Kottayam</option>
+            <option>Idukki</option>
+            <option>Ernakulam</option>
+            <option>Chennai</option>
+            <option>Delhi</option>
+                </select>
+            </td>
+    </tr>
+    
+</table>
+    <br/>
+    <br/>
+<table class="customers" >
+	<tr>		
+        <th><b>Club</b></th>
+        <th><b>Vehicle</b></th>
+        <th><b>Rent</b></th>
+        <th><b>Contact</b></th>
+    </tr>
+    <tbody id="MyDiv">
+            
+            
+    </tbody>
+        </table>
+</form>
+
+<script src="../static/Login/js/jquery.min.js"></script>
+						<script>
+							
+    					$('#sel').change(function()
+    					{
+							debugger;
+        					var first = $('#sel').val();
+        					
+        					var urls='/subcatforbike/?dataid=' + first ;
+                            $.ajax({  
+                                url: urls,
+                                success: function(data){
+                                    debugger;
+            					    $('#MyDiv1').html(data);
+                                    $('tbody[id=MyDiv]').empty()
+                                    $.each(data, function(index, text){        
+                                        $('tbody[id=MyDiv]  ').append(
+                                        $('<tr></tr>').append(
+                                            
+                                        $('<td></td>').html(text[9]),
+                                        $('<td></td>').html(text[2]),
+                                        $('<td></td>').html(text[6]),
+                                        $('<td></td>').html(text[12]),
+                                        $('<td></td>').html('<a href="/CustomerRentBikeRequest/?id='+text[0]+'">Book Now</a>'),
+                                        
+                                        )
+                                        );                       
+                                    });                        
+                                }                       
+                            })
+                        })
+                        </script>
+                        {% if msg %}
+                        <script>
+                            alert("{{msg}}")
+                        </script>
+                        {% endif %}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'Admin Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST">
+		{% csrf_token %}            
+        <label class="head">ADD HOSPITAL</label>		
+        <table align="center">
+            <tr>
+                <td><label>Hospital Name</label></td>
+                <td><input type="text" name="hname" class="textbox" required></td>
+            </tr>
+            <tr>
+                <td><label>Address</label></td>
+                <td><input type="text" name="address" class="textbox" required></td>
+            </tr>
+            <tr>
+                <td><label>District</label></td>
+                <td><input type="text" name="district" class="textbox" required></td>
+            </tr>
+            <tr>
+                <td><label>Location</label></td>
+                <td><input type="text" name="location" class="textbox" required></td>
+            </tr>
+            
+            <tr>
+                <td><label>Phone</label></td>
+                <div class="form-group">
+                <td><input type="number" pattern="[0-9]{10}" name="phone" class="textbox" maxlength="10" required></td>
+               
+                </div>
+            </tr>
+            <tr>
+                <td><label>Email</label></td>
+                <td><input type="email" name="email" class="textbox" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="ADD" name="ADD" class="but"/></td>
+            </tr>
+        </table>
+        {% if msg %}
+<script>
+    alert("{{msg}}")
+</script>
+{% endif %}
+        <br/>
+        <br/>
+
+        <table class="customers">
+
+            <tr>
+                    <th>Hospital ID</th>
+                    <th>Hospital Name</th>
+                    <th>District</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+            </tr>
+            {% for d in data %}
+            <tr>
+                <td>{{d.0}}</td>
+                <td>{{d.1}}</td>
+                <td>{{d.3}}</td>
+                <td>{{d.5}}</td>
+                <td><a href="/AdminRemoveHospital/?id={{d.0}}">Remove</a></td>
+            </tr>
+
+            {% endfor %}
+            </table>  	
+        </form>
+        {% endblock %}

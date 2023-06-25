@@ -1,0 +1,36 @@
+{% extends 'Admin Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST">
+{% csrf_token %}	
+<label class="head">VIEW ALL SHOP</label>
+<table class="customers">
+    <tr>
+            <th>Shop ID</th>
+            <th>Shop Name</th>
+            <th>District</th>
+            <th>Email Id</th>
+            <th>Status</th>
+              
+    </tr>
+    {% for d in data %}
+    <tr>
+        <td>{{d.0}}</td>
+        <td>{{d.1}}</td>
+        <td>{{d.2}}</td>
+        <td>{{d.5}}</td>
+        <td>{{d.7}}</td>
+        <td><a href="/AdminViewShop/?id={{d.0}}&st=Approve">Accept</a></td>
+        <td><a href="/AdminViewShop/?id={{d.0}}&st=Reject">Reject</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

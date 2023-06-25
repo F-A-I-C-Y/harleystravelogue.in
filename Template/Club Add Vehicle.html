@@ -1,0 +1,70 @@
+{% extends 'Club Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" enctype="multipart/form-data" class="banner_form">
+{% csrf_token %}	
+<label class="head">ADD VEHICLE FOR RENT</label>		
+    <table align="center">
+        <tr>
+            <td><label>Vehicle Name</label></td>
+            <td><input type="text" name="vname" class="textbox" required></td>
+        </tr>
+        <tr>
+            <td><label>Cubic Capacity (CC)</label></td>
+            <td><input type="number" name="cap" class="textbox" required></td>
+        </tr>
+        <tr>
+            <td><label>Registration Number</label></td>
+            <td><input type="text" name="regno" class="textbox" required></td>
+        </tr>
+        
+        
+        <tr>
+            <td><label>Rent</label></td>
+            <td><input type="number" name="rent" class="textbox" required></td>
+        </tr>
+        <tr>
+            <td><label>Image</label></td>
+            <td><input type="file" name="file" class="textbox" required></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="ADD" name="ADD" class="but"/></td>
+        </tr>
+    </table>
+    {% if msg %}
+<script>
+    alert("{{msg}}")
+</script>
+{% endif %}
+        <br/>
+        <br/>
+        <table class="customers">
+            <tr>
+                    <th>ID</th>
+                    <th>Vehicle</th>
+                    <th>Register Number</th>
+                    <th>Rent</th>
+                    
+                    <th></th>
+            </tr>
+            {% for d in data %}
+            <tr>
+                <td>{{d.0}}</td>
+                <td>{{d.2}}</td>
+                <td>{{d.4}}</td>
+                <td>{{d.6}}</td>
+                <td><a href="/ClubRemoveVehicle/?id={{d.0}}">Remove</a></td>
+            </tr>
+
+            {% endfor %}
+            </table>  	
+    </form>
+    {% endblock %}

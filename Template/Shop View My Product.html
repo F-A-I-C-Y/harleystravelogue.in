@@ -1,0 +1,35 @@
+{% extends 'Shop Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" class="banner_form">
+{% csrf_token %}	
+<label class="head">MY PRODUCTS</label>	
+<table class="customers">
+
+    <tr>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Stock</th>
+    </tr>
+    {% for d in data %}
+    <tr>
+        <td>{{d.3}}</td>
+        <td>{{d.4}}</td>
+        <td>{{d.5}}</td>
+        <td><a href='/ShopUpdateProduct?id={{d.0}}'>Update</a></td>
+        <td><a href='/ShopRemoveProduct?id={{d.0}}'>Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+
+
+{% endblock %}

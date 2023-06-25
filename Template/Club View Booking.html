@@ -1,0 +1,32 @@
+{% extends 'Club Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" class="banner_form">
+{% csrf_token %}	
+<label class="head">VIEW ALL BOOKINGS</label>	
+<table class="customers">
+    <tr>
+            <th>Vehicle</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+    </tr>
+    {% for d in data %}
+    <tr>
+        <td>{{d.1}}</td>
+        <td>{{d.4}}</td>
+        <td>{{d.3}}</td>
+        <td><a href="/ClubViewBooking/?id={{d.0}}&st=Accept&mo={{d.3}}">Accept</a></td>
+        <td><a href="/ClubViewBooking/?id={{d.0}}&st=Reject&mo={{d.3}}">Reject</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</form>
+{% endblock %}

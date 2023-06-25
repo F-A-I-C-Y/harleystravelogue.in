@@ -1,0 +1,30 @@
+{% extends 'Customer Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" class="banner_form">
+{% csrf_token %}	
+<label class="head">VIEW BOOKING</label>	
+    <div class="row" >
+        <div class="col-md-2" style="border-style: solid;"><b>Order ID</b></div>
+        <div class="col-md-2" style="border-style: solid;"><b>Product Name</b></div>
+        <div class="col-md-2" style="border-style: solid;"><b>Product Price</b></div>
+        <div class="col-md-2" style="border-style: solid;"><b>Quantity</b></div>
+    </div>
+    {% for d in data %}
+    <div class='row' >
+        <div class='col-md-2' style='border-style: solid;'>{{d.0}}</div>
+        <div class='col-md-2' style='border-style: solid;'>{{d.3}}</div>
+        <div class='col-md-2' style='border-style: solid;'>{{d.4}}</div>
+        <div class='col-md-2' style='border-style: solid;'>{{d.5}}</div>
+    </div>
+    {% endfor %}
+</form>
+{% endblock %}

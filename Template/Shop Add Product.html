@@ -1,0 +1,78 @@
+{% extends 'Shop Page.html' %}
+{% block body %}
+<style>
+    .head
+    {
+        padding-left: 490px;
+        font-weight: bolder;
+        font-size: larger;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<form method="POST" enctype="multipart/form-data" class="banner_form">
+{% csrf_token %}	
+<label class="head">ADD PRODUCTS</label>	
+   <table align="center">
+    <tr>
+    <td>
+        <label>Product  Name</label></td>
+        <td><input type="text" name="product_title" class="textbox" required></td>
+     </tr>
+     <tr>
+    <td>
+        <label>Category Name</label></td>
+        <td>
+        <select name="cat_title" value=" " class="textbox" style="color: rgb(255, 20, 20);" required>
+            <option>---Select Category---</option>
+                {%for c in cat %}
+            <option value="{{c.0}}">{{c.1}}</option>
+                {% endfor %}
+        </select>
+   </td>
+        </tr>
+    <tr>
+    <td>
+        <label>Brand Name</label></td>
+        <td><select name="brand_title" value=" " class="textbox" style="color: rgb(255, 20, 20);" required>
+                <option>----Select Brand----</option>
+                    {%for c in subcat %}
+                <option value="{{c.0}}">{{c.1}}</option>
+                    {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+    <td>
+        <label>Price</label></td>
+        <td><input type="text" name="price" pattern="[0-9]+" class="textbox" required></td>
+     </tr>
+     <tr>
+        <td><label>Quantity</label></td>
+        <td><input type="text" name="qty" class="textbox" required></td>
+     </tr>
+    <tr>
+        <td><label>Image</label></td>
+        <td><input type="file" name="file" class="textbox" required></td>
+    </tr>
+    
+    <tr>
+        <td><label>Description</label></td>
+        <td><input type="text" name="des" class="textbox" required></td>
+     </tr>
+     <tr>
+         <td><label>Key Word</label></td>
+        <td><input type="text" name="key" class="textbox" required></td>
+     </td>
+</tr>
+<tr>
+<td>
+    <input type="submit" value="Add" name="Add" class="but"/></td></tr>
+</table>
+
+</form>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+</script>
+{% endif %}
+{% endblock %}
